@@ -1,0 +1,4 @@
+*.pyc
+__pycache__/
+.pylest_cache/
+.mypy_cache/
