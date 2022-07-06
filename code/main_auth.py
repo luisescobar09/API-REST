@@ -6,6 +6,7 @@ from typing import List, Optional
 from pydantic import BaseModel
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
+from fastapi.middleware.cors import CORSMiddleware
 
 class Respuesta(BaseModel): #Modelado de los datos
     mensaje: str
@@ -24,6 +25,18 @@ class Usuarios(BaseModel):
 app = FastAPI()
 security = HTTPBasic()
 ruta = 'sql/clientes.sqlite'
+
+origins = [
+    "https://8080-luisescobar09-apirest-zbeh2r72okr.ws-us51.gitpod.io/"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # MÉTODO PARA VALIDAR SI EL USUARIO EXISTE
 def get_current_level(credentials: HTTPBasicCredentials = Depends(security)):
@@ -67,7 +80,6 @@ async def get_clientes(offset: int = 0, limit: int = 10, level: int = Depends(ge
         )
 
 @app.get("/clientes/{id_cliente}",
-    response_model= Cliente,
     status_code=status.HTTP_202_ACCEPTED,) #Ahora como el segundo endpoint pero dependiendo del parametro que proporcione el usuario
 async def get_clientes_id(id_cliente: int, level: int = Depends(get_current_level)): #ID de tipo entero
     if level == 0 or level == 1: #Para administradores y usuarios
