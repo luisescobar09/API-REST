@@ -8,19 +8,23 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-    <script type="text/javascript" src="/static/get_clientes.js"></script>
+    <script type="text/javascript" src="/js/get_clientes.js"></script>
+    <script type="text/javascript" src="/js/delete_cliente.js"></script>
     <title>Clientes</title>
 </head>
 <body>
+        <br>
         <h1 class="text-center">Listado de Clientes:</h1>
         <br>
 
-            <label for="input_id_cliente">ID Cliente: </label>
+            <label for="input_id_cliente" class="h4">ID Cliente: </label>
             <input type="number" id="input_id_cliente" required>
             <input type = "button" class="btn btn-success" onclick = "getClienteByID()" value = "Buscar">
 
-        <br>
+        <br> </br>
+        <a href="post/" class="btn btn-primary btn-lg h2"><i class="far fa-plus-square"></i>  Agregar cliente</a>
         <table id="tabla_clientes" class="table table-striped table-hover text-center">
         </table>
         <div id="alert">

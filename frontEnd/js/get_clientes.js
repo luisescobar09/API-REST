@@ -11,7 +11,7 @@ function getClienteByID() {
     username= sessionStorage.getItem("username");
     password= sessionStorage.getItem("password");
    
-    request.open('GET', 'https://8000-luisescobar09-apirest-zbeh2r72okr.ws-us51.gitpod.io/clientes/'+id_cliente, true);
+    request.open('GET', 'http://localhost:8000/clientes/'+id_cliente, true);
     request.setRequestHeader("Accept", "application/json");
     request.setRequestHeader("Authorization", "Basic " + btoa("admin" + ":" + "admin"))
     request.setRequestHeader("Content-Type", "application/json");
@@ -26,7 +26,9 @@ function getClienteByID() {
             <th>ID Cliente</th>
             <th>Nombre</th>
             <th>Email</th>
-            <th>Opciones</th>
+            <th>Ver</th>
+            <th>Actualizar</th>
+            <th>Borrar</th>
         </tr>`;
 
     request.onload = () => {
@@ -55,8 +57,13 @@ function getClienteByID() {
                 var id_cliente = document.createElement('td');
                 var nombre = document.createElement('td');
                 var email = document.createElement('td');
+                var get_cliente = document.createElement('td');
+                var update_cliente = document.createElement('td');
+                var delete_cliente = document.createElement('td');
 
-                get_cliente.innerHTML = "<a href='\\producto\\get\\"+json.id_cliente+"'>Ver</a>";
+                get_cliente.innerHTML = "<a class='btn btn-link link-success' href='\\get\\?"+json.id_cliente+"'><i class='fas fa-eye'></i></a>";
+                update_cliente.innerHTML = "<a class='btn btn-link link-info' href='\\put\\?"+json.id_cliente+"'><i class='far fa-edit'></i></a>";
+                delete_cliente.innerHTML = "<a class='btn btn-link link-danger' href='/' onclick='delete_cliente("+json.id_cliente+")'><i class='far fa-trash-alt'></i></a>";
                 id_cliente.innerHTML = json.id_cliente;
                 nombre.innerHTML = json.nombre;
                 email.innerHTML = json.email;
@@ -65,6 +72,8 @@ function getClienteByID() {
                 tr.appendChild(nombre);
                 tr.appendChild(email);
                 tr.appendChild(get_cliente);
+                tr.appendChild(update_cliente);
+                tr.appendChild(delete_cliente);
                 
                 tblBody.appendChild(tr);
                 tabla.appendChild(tblHead);
@@ -81,7 +90,7 @@ function getClientes(offset) {
     username= sessionStorage.getItem("username");
     password= sessionStorage.getItem("password");
    
-    request.open('GET', 'https://8000-luisescobar09-apirest-zbeh2r72okr.ws-us51.gitpod.io/clientes/?offset='+offset+'&limit=10', true);
+    request.open('GET', 'http://localhost:8000/clientes/?offset='+offset+'&limit=10', true);
     request.setRequestHeader("Accept", "application/json");
     request.setRequestHeader("Authorization", "Basic " + btoa("admin" + ":" + "admin"))
     request.setRequestHeader("Content-Type", "application/json");
@@ -96,7 +105,9 @@ function getClientes(offset) {
             <th>ID Cliente</th>
             <th>Nombre</th>
             <th>Email</th>
-            <th>Opciones</th>
+            <th>Ver</th>
+            <th>Editar</th>
+            <th>Borrar</th>
         </tr>`;
 
     request.onload = () => {
@@ -116,12 +127,16 @@ function getClientes(offset) {
             console.log(json);
             for (let i = 0; i < json.length; i++) {
                 var tr = document.createElement('tr');
-                var get_cliente = document.createElement('td');
                 var id_cliente = document.createElement('td');
                 var nombre = document.createElement('td');
                 var email = document.createElement('td');
+                var get_cliente = document.createElement('td');
+                var update_cliente = document.createElement('td');
+                var delete_cliente = document.createElement('td');
 
-                get_cliente.innerHTML = "<a href='\\producto\\get\\"+json[i].id_cliente+"'>Ver</a>";
+                get_cliente.innerHTML = "<a class='btn btn-link link-success' href='\\get\\?"+json[i].id_cliente+"'><i class='fas fa-eye'></i></a>";
+                update_cliente.innerHTML = "<a class='btn btn-link link-info' href='\\put\\?"+json[i].id_cliente+"'><i class='far fa-edit'></i></a>";
+                delete_cliente.innerHTML = "<button type='button' class='btn btn-link link-danger' onclick='delete_cliente("+json[i].id_cliente+")'><i class='far fa-trash-alt'></i></button>";
                 id_cliente.innerHTML = json[i].id_cliente;
                 nombre.innerHTML = json[i].nombre;
                 email.innerHTML = json[i].email;
@@ -130,6 +145,8 @@ function getClientes(offset) {
                 tr.appendChild(nombre);
                 tr.appendChild(email);
                 tr.appendChild(get_cliente);
+                tr.appendChild(update_cliente);
+                tr.appendChild(delete_cliente);
                 
                 tblBody.appendChild(tr);
             }
