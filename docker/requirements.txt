@@ -8,3 +8,4 @@ isort==5.10.1
 mypy==0.961
 web.py==0.62
 requests==2.28.0
+pyrebase4
