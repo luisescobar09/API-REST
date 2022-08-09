@@ -28,7 +28,7 @@ function sendRequest(token) {
             const json = JSON.parse(response);
             //console.log("JSON:", json);
             if (request.status === 202) {
-                    document.getElementById("email").innerHTML = "¡Bienvenido " + json.user_data.email + "!"
+                    document.getElementById("email_info").innerHTML = "¡Bienvenido " + json.user_data.email + "!"
             }
             else if (request.status === 403) {
                     alert(json.detail)

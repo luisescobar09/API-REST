@@ -19,7 +19,7 @@ function login() {
                             document.getElementById("password").focus();
                     }
                     else {
-                            sendResquest(email, password);
+                            sendRequest(email, password);
                     }        
             }
             else {
@@ -28,7 +28,7 @@ function login() {
             }
     }
 }
-function sendResquest(email, password) {
+function sendRequest(email, password) {
     var request = new XMLHttpRequest();
     request.open("GET", "http://localhost:8000/users/validate/", true);
     request.setRequestHeader("Accept", "application/json");

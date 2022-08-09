@@ -19,7 +19,7 @@ function signup() {
                             document.getElementById("password").focus();
                     }
                     else {
-                            sendResquest(email, password);
+                            sendRequest(email, password);
                     }        
             }
             else {
@@ -29,7 +29,7 @@ function signup() {
     }
 }
 
-function sendResquest(email, password) {
+function sendRequest(email, password) {
     var payload = {
             "email" : email,
             "password" : password
